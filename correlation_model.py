@@ -13,10 +13,10 @@ print(df.columns)'''
 X = df[['Std','ID','Material','Heat treatment','Su', 'Sy', 'A5', 'Bhn', 'E', 'G','mu','Ro','pH', 'Desc', 'HV']]
 Y = df['Prediction']
 
-# Select numeric columns
+# Selecting the numeric columns
 numeric_df = df.select_dtypes(include='number')
 
-# Calculate correlation matrix
+# Calculating  correlation matrix
 corr = numeric_df.corr()
 
 # --- Seaborn Heatmap Visualization ---
@@ -27,30 +27,31 @@ sns.heatmap(corr, annot=True, fmt=".2f", cmap='coolwarm',
             cbar_kws={'label': 'Correlation Coefficient', 'orientation': 'vertical'},
             square=True, ax=ax)
 
-# Set the figure-level title
+# title
 fig.suptitle("Correlation Among Material Properties", fontsize=16, fontweight='bold')
 
-# Rotate tick labels for better readability
+# Rotating for better readability 
 plt.xticks(rotation=45, ha='right')
 plt.yticks(rotation=0)
 
-# Adjust subplot params to give space for the title
+
 plt.subplots_adjust(top=0.88)  # Adjust top margin to avoid clipping the title
 
 plt.show()
 
 # --- Pandas Styled Table with Conditional Formatting ---
 
-# Define function to highlight text color where correlation magnitude > 0.7
+# Defining function to highlight text color where correlation magnitude > 0.7
 def highlight(val):
     color = 'red' if abs(val) > 0.7 else 'black'
     return f'color: {color}'
 
-# Apply the style to the correlation matrix dataframe
+# Applying the style to the correlation matrix dataframe
 styled_corr = corr.style.applymap(highlight)
 
-# Display styled table (in Jupyter or similar environments)
+# Displaying styled table (in Jupyter or similar environments)
 display(styled_corr)
 
-# Save styled table to an HTML file
-styled_corr.to_html("correlation_matrix_styled.html")
+# Saving styled table to an HTML file
+# styled_corr.to_html("correlation_matrix_styled.html")
+
